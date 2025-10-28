@@ -6,6 +6,7 @@ public class SpellsData : ScriptableObject
     [SerializeField] private string spellName;
     [SerializeField] private float damage;
     [SerializeField] int playerLayer;
+    [SerializeField] int enemyLayer;
     [SerializeField] float lifetime;
 
     // Public properties (read-only or read/write)
@@ -25,6 +26,12 @@ public class SpellsData : ScriptableObject
     {
         get => playerLayer;
         set => playerLayer = value;
+    }
+
+    public int EnemyLayer
+    {
+        get => enemyLayer;
+        set => enemyLayer = value;
     }
     
     public float LifeTime

@@ -3,43 +3,45 @@ using UnityEngine.InputSystem;
 
 public class FireBallAttack : MonoBehaviour
 {
-    [SerializeField] GameObject fireballPrefab;
-    [SerializeField] Transform firePoint;
-    [SerializeField] float launchForce = 10f;
-    [SerializeField] LineRenderer aimLine;
+    [SerializeField] GameObject fireballPrefab;     
+    [SerializeField] Transform firePoint;          
+    [SerializeField] float launchForce = 10f;       
+    [SerializeField] LineRenderer aimLine;          
 
-    [SerializeField] InputActionAsset inputActions;
-    private InputAction fireBall;
+    [SerializeField] InputActionAsset inputActions; 
+    private InputAction fireBall;                   
 
-    private Vector2 aimDirection;
-    private bool isAiming;
+    private Vector2 aimDirection;                   
+    private bool isAiming;                          
 
     private void OnEnable()
     {
-        inputActions.FindActionMap("Player").Enable();
+        inputActions.FindActionMap("Player").Enable(); // Zorgt dat het "Player" inputmap actief is
     }
 
     private void Start()
     {
-        fireBall = InputSystem.actions.FindAction("Attack");
+        fireBall = InputSystem.actions.FindAction("Attack"); // Haal de "Attack" actie op
     }
 
     void Update()
     {
-        Aim();
+        Aim(); // Continu bijwerken van de richtingshoek
 
+        // Houdt bij of speler richt of schiet
         if (fireBall.IsPressed())
             isAiming = true;
 
         if (fireBall.WasReleasedThisFrame())
         {
             isAiming = false;
-            Shoot();
+            Shoot(); // Schiet de fireball af
         }
 
-        DrawAimLine(isAiming);
+        DrawAimLine(isAiming); // Toon richtlijn alleen tijdens het richten
     }
 
+    // Bereken richting naar muis en draai speler daarnaar
     void Aim()
     {
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -49,6 +51,7 @@ public class FireBallAttack : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 
+    // Maak Fireball
     void Shoot()
     {
         GameObject fireball = Instantiate(fireballPrefab, firePoint.position, Quaternion.identity);
@@ -56,6 +59,7 @@ public class FireBallAttack : MonoBehaviour
         rb.AddForce(aimDirection * launchForce, ForceMode2D.Impulse);
     }
 
+    // Tekent richtlijn (alleen zichtbaar tijdens richten)
     void DrawAimLine(bool show)
     {
         if (aimLine == null) return;
@@ -64,7 +68,7 @@ public class FireBallAttack : MonoBehaviour
         {
             aimLine.enabled = true;
             aimLine.SetPosition(0, firePoint.position);
-            aimLine.SetPosition(1, firePoint.position + (Vector3)aimDirection * 10f); // lengte aanpassen
+            aimLine.SetPosition(1, firePoint.position + (Vector3)aimDirection * 10f); // Lengte van de lijn
         }
         else
         {

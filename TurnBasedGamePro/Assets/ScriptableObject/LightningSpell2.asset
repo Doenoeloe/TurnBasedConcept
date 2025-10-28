@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b123a8c2e448988419fbb47ba4657a99, type: 3}
-  m_Name: FireBallSpell
+  m_Name: LightningSpell2
   m_EditorClassIdentifier: 
   spellName: FireBall
-  damage: 10
-  playerLayer: 6
-  lifetime: 10
+  damage: 5
+  playerLayer: 7
+  enemyLayer: 6
+  lifetime: 1
