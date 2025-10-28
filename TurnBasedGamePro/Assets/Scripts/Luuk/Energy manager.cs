@@ -24,7 +24,7 @@ public class Energymanager : MonoBehaviour
             UseEnergy(0.1f);
 
         if (Input.GetKeyDown(KeyCode.F))
-            UseEnergy(15f);
+            UseEnergy(25f);
     }
 
     void UseEnergy(float amount)
