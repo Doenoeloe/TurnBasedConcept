@@ -1,13 +1,26 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class FireBall : MonoBehaviour
 {
     [SerializeField] GameObject explosionEffect;   
-    [SerializeField] SpellsData spellData;         
+    [SerializeField] SpellsData spellData;
+
+    [SerializeField] AudioClip whooshSound;
+    [SerializeField] AudioClip explosionSound;
+
+    private AudioSource audioSource;
+
+    // Koppel de audioSource
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     void Start()
     {
-        // Verwijder fireball automatisch na een bepaalde tijd
+        // Verwijder fireball automatisch na een bepaalde tijd en play de whoosSound
+        audioSource.PlayOneShot(whooshSound);
         Destroy(gameObject, spellData.LifeTime);
     }
 
@@ -34,11 +47,20 @@ public class FireBall : MonoBehaviour
                 // Damage
                 print("DamageFire");
             }
-            // Destroy de fireball
-            Destroy(gameObject);
-
-            // Maak explosie-effect aan op de impactpositie
+            // Spawn visueel effect
             Instantiate(explosionEffect, transform.position, Quaternion.identity);
+
+            // Speel explosie geluid op dezelfde plek, onafhankelijk van dit object
+            GameObject temp = new GameObject("TempAudio");
+            temp.transform.position = transform.position;
+            AudioSource a = temp.AddComponent<AudioSource>();
+            a.clip = explosionSound;
+            a.spatialBlend = 0f; // 2D geluid
+            a.Play();
+            Destroy(temp, explosionSound.length);
+
+            // Vernietig de fireball
+            Destroy(gameObject);
         }
     }
 }
