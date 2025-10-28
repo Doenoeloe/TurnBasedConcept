@@ -169,14 +169,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageLayers:
     serializedVersion: 2
-    m_Bits: 193
+    m_Bits: 192
   damageRings:
   - radius: 2
-    damage: 20
+    damage: 60
   - radius: 3
     damage: 35
   - radius: 5
-    damage: 60
+    damage: 20
   explosionEffect: {fileID: 2208819049832880418, guid: 74070ea5bc135ea4d8b512a458fbe386, type: 3}
   spellData: {fileID: 11400000, guid: c4481fe9336b87746a1f032dba78fc66, type: 2}
   whooshSound: {fileID: 8300000, guid: 6a86f3aad6b8ed44a9cb593c8d4f9e93, type: 3}
