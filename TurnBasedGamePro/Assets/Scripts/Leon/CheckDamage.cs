@@ -34,14 +34,17 @@ public class CheckDamage : MonoBehaviour
         {
             float distance = Vector2.Distance(transform.position, hit.transform.position);
 
-            // Find which ring this object falls into
             foreach (var ring in damageRings)
             {
                 if (distance <= ring.radius)
                 {
-                    //Debug.Log($"{hit.name} takes {ring.damage} damage! (Distance: {distance:F2})");
-
-                    break; // Stop checking further rings once a match is found
+                    Health health = hit.GetComponent<Health>();
+                    if (health != null)
+                    {
+                        health.Damage(ring.damage); // Pas hier de damage toe
+                        Debug.Log($"{hit.name} takes {ring.damage} damage!");
+                    }
+                    break; // stop verder checken voor deze collider
                 }
             }
         }

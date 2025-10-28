@@ -45,6 +45,7 @@ public class FireBall : CheckDamage
             if (collision.gameObject.layer == spellData.EnemyLayer)
             {
                 // Damage
+                DamageFireball();
                 print("DamageFire");
             }
             // Spawn visueel effect
