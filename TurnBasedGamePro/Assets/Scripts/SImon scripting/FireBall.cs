@@ -3,7 +3,7 @@ using UnityEngine.Rendering;
 
 public class FireBall : CheckDamage
 {
-    [SerializeField] GameObject explosionEffect;   
+    [SerializeField] GameObject explosionEffect;
     [SerializeField] SpellsData spellData;
 
     [SerializeField] AudioClip whooshSound;
@@ -44,12 +44,12 @@ public class FireBall : CheckDamage
         {
             if (collision.gameObject.layer == spellData.EnemyLayer)
             {
-                DamageFireball();
                 // Damage
                 print("DamageFire");
             }
             // Spawn visueel effect
             Instantiate(explosionEffect, transform.position, Quaternion.identity);
+            DamageFireball();
             // Speel explosie geluid op dezelfde plek, onafhankelijk van dit object
             GameObject temp = new GameObject("TempAudio");
             temp.transform.position = transform.position;
