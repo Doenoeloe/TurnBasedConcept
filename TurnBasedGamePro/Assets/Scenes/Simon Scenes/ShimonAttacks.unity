@@ -503,7 +503,6 @@ MonoBehaviour:
   lightningPrefab: {fileID: 584289656583739339, guid: aa4666451a910b0449cf7a0b8d524e61, type: 3}
   lightningExplosionEffect: {fileID: 2208819049832880418, guid: 6a3331c58d391794baf72165ea02a599, type: 3}
   inputActions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  spellData: {fileID: 11400000, guid: 416fec41779311145a2bc002a4fc9220, type: 2}
 --- !u!1 &644275388
 GameObject:
   m_ObjectHideFlags: 0
@@ -885,7 +884,6 @@ MonoBehaviour:
   lightningPrefab: {fileID: 584289656583739339, guid: aa4666451a910b0449cf7a0b8d524e61, type: 3}
   lightningExplosionEffect: {fileID: 2208819049832880418, guid: 6a3331c58d391794baf72165ea02a599, type: 3}
   inputActions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  spellData: {fileID: 11400000, guid: ec3220c9c9f27564c93d5550d6934074, type: 2}
 --- !u!120 &1663798164
 LineRenderer:
   serializedVersion: 2
@@ -1215,7 +1213,7 @@ GameObject:
   - component: {fileID: 1803961825}
   - component: {fileID: 1803961828}
   m_Layer: 6
-  m_Name: TestPlayer
+  m_Name: TestPlayer1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
