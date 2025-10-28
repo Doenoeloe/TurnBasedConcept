@@ -1,60 +1,48 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField]int health;
-    int maxHealth;
-    [SerializeField] Text healthText;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] protected int health;
+    [SerializeField] protected int maxHealth = 100;
+    [SerializeField] protected TMP_Text healthText;
+
+    protected virtual void Start()
     {
-        
+        health = maxHealth;
+        SetText();
     }
 
-    // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
-        if (Input.GetKeyUp(KeyCode.B))
-        {
-            getHealth(100);
-            Debug.Log("Health reset to 100");
-        }
-        else if (Input.GetKeyUp(KeyCode.A))
-        {
-            Damage(60);
-            Debug.Log("Took 60 damage");
-        }
-        else if (Input.GetKeyUp(KeyCode.D))
-        {
-            Healing(health);
-            Debug.Log("Healed 25 health");
-        }
+        // Base health doesn’t need to handle input directly.
+        // Input will be handled in child classes.
     }
-    public int getHealth(int pHealth)
+
+    public virtual void SetHealth(int pHealth)
     {
-        health = Mathf.Clamp(pHealth,0,maxHealth);
-        settext();
-        return health;
+        health = Mathf.Clamp(pHealth, 0, maxHealth);
+        SetText();
     }
-    public int MaxHealth(int pMaxHealth)
+
+    public virtual void Damage(int amount)
     {
-        maxHealth = pMaxHealth;
-        return maxHealth;
-    }   
-    public void Damage(int damage)
-    {
-        health -= damage;
-        settext();
-    }   
-    public void Healing(int pCurrentHealth)
-    {
-        pCurrentHealth = pCurrentHealth + 25;
-        health = Mathf.Clamp(pCurrentHealth, 0, maxHealth);
-        settext();
+        health -= amount;
+        health = Mathf.Clamp(health, 0, maxHealth);
+        SetText();
     }
-    void settext()
+
+    public virtual void Heal(int amount)
     {
-        healthText.text = "Health: " + health.ToString();
+        health += amount;
+        health = Mathf.Clamp(health, 0, maxHealth);
+        SetText();
+    }
+
+    protected void SetText()
+    {
+        if (healthText != null)
+            healthText.text = $"Health: {health}";
     }
 }
