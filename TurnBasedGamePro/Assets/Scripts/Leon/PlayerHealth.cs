@@ -1,23 +1,21 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerOneHealth : Health
+public class PlayerHealth : Health
 {
-    //[SerializeField] private int maxHealth = 100;
     [SerializeField] private int healAmount = 20;
     [SerializeField] private InputActionAsset inputActions;
+    [SerializeField] private AudioClip healSound;
 
-    private int currentHealth;
+    //private int currentHealth;
     private InputAction healAction;
     private Turnmanager turnManager;
     private Energymanager energyManager;
-
     private AudioSource audioSource;
-    [SerializeField] AudioClip healSound;
 
     private void Awake()
     {
-        currentHealth = maxHealth;
+        //currentHealth = maxHealth;
         turnManager = GetComponent<Turnmanager>();
         energyManager = GetComponent<Energymanager>();
         audioSource = GetComponent<AudioSource>();
@@ -31,11 +29,11 @@ public class PlayerOneHealth : Health
 
     protected override void Update()
     {
-        //Stop als het NIET jouw beurt is
+        // Stop als het NIET jouw beurt is
         if (!turnManager.IsCurrentPlayer(gameObject))
             return;
 
-        //Alleen healen als de speler op Heal drukt
+        // Alleen healen als de speler op Heal drukt
         if (healAction.triggered)
         {
             HealPlayer();
@@ -44,7 +42,7 @@ public class PlayerOneHealth : Health
 
     private void HealPlayer()
     {
-        if (currentHealth >= maxHealth && energyManager.currentEnergy >= 30)
+        if (health < maxHealth && energyManager.currentEnergy >= 30)
         {
             Heal(healAmount);
             energyManager.UseEnergy(30);
