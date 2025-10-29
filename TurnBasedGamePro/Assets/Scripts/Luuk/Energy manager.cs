@@ -5,7 +5,7 @@ public class Energymanager : MonoBehaviour
 {
     [Header("Energy Settings")]
     [SerializeField] private float maxEnergy = 50f;
-    [SerializeField] private float currentEnergy;
+    public float currentEnergy;
 
     
     internal event Action<GameObject> OnEnergyDepleted;
@@ -23,11 +23,11 @@ public class Energymanager : MonoBehaviour
         if (Input.GetKey(KeyCode.A))
             UseEnergy(0.1f);
 
-        if (Input.GetKeyDown(KeyCode.F))
-            UseEnergy(25f);
+        //if (Input.GetKeyDown(KeyCode.F))
+        //    UseEnergy(25f);
     }
 
-    void UseEnergy(float amount)
+    public void UseEnergy(float amount)
     {
         if (amount <= 0f) return;
 

@@ -8,7 +8,10 @@ public class Lightning : MonoBehaviour
     [SerializeField] GameObject lightningExplosionEffect; 
 
     [SerializeField] InputActionAsset inputActions;       
-    private InputAction lightning;               
+    private InputAction lightning;
+
+    private Energymanager energyManager;
+    private Turnmanager turnManager;
 
     private void OnEnable()
     {
@@ -20,14 +23,26 @@ public class Lightning : MonoBehaviour
     {
         // Zoek de "Lightning" actie uit het Input System
         lightning = InputSystem.actions.FindAction("Lightning");
+
+        energyManager = GetComponentInParent<Energymanager>();
+        turnManager = GetComponentInParent<Turnmanager>();
     }
 
     void Update()
     {
-        // Controleer of de lightning-knop is ingedrukt (triggered = éénmalig bij indrukken)
+        // Alleen verder als deze speler aan de beurt is
+        if (!turnManager.IsCurrentPlayer(transform.root.gameObject))
+            return;
+
+        // Alleen verder als er genoeg energie is
+        if (energyManager.currentEnergy < 25) // bijvoorbeeld 25 energy voor lightning
+            return;
+
+        // Lightning actie triggered?
         if (lightning.triggered)
         {
             CastLightning();
+            energyManager.UseEnergy(25); // verbruik energie
         }
     }
 
