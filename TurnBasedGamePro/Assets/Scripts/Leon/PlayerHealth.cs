@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerTwoHealth : Health
+public class PlayerHealth : Health
 {
     public void Start()
     {
