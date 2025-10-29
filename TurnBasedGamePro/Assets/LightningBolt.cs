@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class LightningBolt : MonoBehaviour
+public class LightningBolt : CheckDamage
 {
     [SerializeField] GameObject explosionEffect;
     [SerializeField] SpellsData spellData;
@@ -28,9 +28,10 @@ public class LightningBolt : MonoBehaviour
     {
         if (isEnemyHit) return;
 
-        if (other.layer == spellData.EnemyLayer)
-        {
+        //if (other.layer == spellData.EnemyLayer)
+        //{
             // Damage
+            DamageSpell();
             Debug.Log("DamageLightning");
 
             GameObject temp = new GameObject("TempAudio");
@@ -42,7 +43,7 @@ public class LightningBolt : MonoBehaviour
             Destroy(temp, explosionSound.length);
             Instantiate(explosionEffect, transform.position, Quaternion.identity);
             isEnemyHit = true;
-        }
+        //}
     }
 
 }
