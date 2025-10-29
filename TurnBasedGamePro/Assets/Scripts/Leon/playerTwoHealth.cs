@@ -18,8 +18,8 @@ public class PlayerTwoHealth : Health
     private void Awake()
     {
         currentHealth = maxHealth;
-        turnManager = FindFirstObjectByType<Turnmanager>(); // Zoek de Turnmanager in de scene
-        energyManager = FindFirstObjectByType<Energymanager>();
+        turnManager = GetComponent<Turnmanager>();
+        energyManager = GetComponent<Energymanager>();
         audioSource = GetComponent<AudioSource>();
     }
 

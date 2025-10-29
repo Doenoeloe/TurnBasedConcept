@@ -10,7 +10,7 @@ public class PlayerOneHealth : Health
     private int currentHealth;
     private InputAction healAction;
     private Turnmanager turnManager;
-    private Energymanager energymanager;
+    private Energymanager energyManager;
 
     private AudioSource audioSource;
     [SerializeField] AudioClip healSound;
@@ -18,8 +18,8 @@ public class PlayerOneHealth : Health
     private void Awake()
     {
         currentHealth = maxHealth;
-        turnManager = FindFirstObjectByType<Turnmanager>(); // Zoek de Turnmanager in de scene
-        energymanager = FindFirstObjectByType<Energymanager>();
+        turnManager = GetComponent<Turnmanager>();
+        energyManager = GetComponent<Energymanager>();
         audioSource = GetComponent<AudioSource>();
     }
 
@@ -44,10 +44,10 @@ public class PlayerOneHealth : Health
 
     private void HealPlayer()
     {
-        if (currentHealth >= maxHealth && energymanager.currentEnergy >= 30)
+        if (currentHealth >= maxHealth && energyManager.currentEnergy >= 30)
         {
             Heal(healAmount);
-            energymanager.UseEnergy(30);
+            energyManager.UseEnergy(30);
             audioSource.PlayOneShot(healSound);
         }
     }
