@@ -14,7 +14,7 @@ public class CheckDamage : MonoBehaviour
 
     private bool hasExploded = false; // Tracks if the explosion already happened
 
-    public void DamageFireball()
+    public void DamageSpell()
     {
         print("FireBall");
         if (hasExploded) return; // Only do this once

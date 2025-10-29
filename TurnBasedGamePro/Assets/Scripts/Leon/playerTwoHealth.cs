@@ -9,11 +9,11 @@ public class PlayerTwoHealth : Health
             SetHealth(100);
             Debug.Log("Player 2 health reset to 100");
         }
-       /* else if (Input.GetKeyUp(KeyCode.K))
-        {
-            Damage(40);
-            Debug.Log("Player 2 took 40 damage");
-        }*/
+        /* else if (Input.GetKeyUp(KeyCode.K))
+         {
+             Damage(40);
+             Debug.Log("Player 2 took 40 damage");
+         }*/
         else if (Input.GetKeyUp(KeyCode.L))
         {
             Heal(15);
