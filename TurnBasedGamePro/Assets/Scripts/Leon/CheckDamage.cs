@@ -16,7 +16,7 @@ public class CheckDamage : MonoBehaviour
 
     public void DamageSpell()
     {
-        print("FireBall");
+        //print("FireBall");
         if (hasExploded) return; // Only do this once
         hasExploded = true;
 
@@ -39,7 +39,8 @@ public class CheckDamage : MonoBehaviour
             {
                 if (distance <= ring.radius)
                 {
-                    
+                    Health health = hit.GetComponent<Health>();
+                    health.Damage(ring.damage); // Pas hier de damage toe
                     //Debug.Log($"{hit.name} takes {ring.damage} damage! (Distance: {distance:F2})");
 
                     break; // Stop checking further rings once a match is found

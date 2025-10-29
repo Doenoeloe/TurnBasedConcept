@@ -1922,7 +1922,7 @@ GameObject:
   - component: {fileID: 104195965}
   - component: {fileID: 104195964}
   - component: {fileID: 104195963}
-  - component: {fileID: 104195966}
+  - component: {fileID: 104195968}
   - component: {fileID: 104195967}
   m_Layer: 7
   m_Name: TestPlayer2
@@ -2111,24 +2111,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
---- !u!114 &104195966
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 104195958}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7d5d38ba1314fb418cc75d30369b2ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 0
-  maxHealth: 100
-  healthText: {fileID: 1885908440}
-  healAmount: 20
-  inputActions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  healSound: {fileID: 8300000, guid: 8e6fdf4699048004988c6cd8df20a8dc, type: 3}
 --- !u!82 &104195967
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2226,6 +2208,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &104195968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 104195958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c00063679c3bc874e9280ed3a9831f42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  maxHealth: 100
+  healthText: {fileID: 1885908440}
+  healAmount: 20
+  inputActions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  healSound: {fileID: 8300000, guid: 8e6fdf4699048004988c6cd8df20a8dc, type: 3}
 --- !u!1 &147608029
 GameObject:
   m_ObjectHideFlags: 0
