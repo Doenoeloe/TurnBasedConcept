@@ -4,20 +4,14 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] protected int health;
-    [SerializeField] protected int maxHealth = 100;
+    [SerializeField] public int health;
+    [SerializeField] public int maxHealth = 100;
 
     protected virtual void Start()
     {
         health = maxHealth;
     }
 
-    protected virtual void Update()
-    {
-        // Base health doesn’t need to handle input directly.
-        // Input will be handled in child classes.
-        print(health + gameObject.name);
-    }
 
     public virtual void SetHealth(int pHealth)
     {
