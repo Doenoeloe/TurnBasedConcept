@@ -4848,6 +4848,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af059ec0d030db74cb1e6ccb2548f8b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageLayers:
+    serializedVersion: 2
+    m_Bits: 192
+  damageRings:
+  - radius: 2
+    damage: 10
+  - radius: 3
+    damage: 5
+  - radius: 5
+    damage: 2
   explosionEffect: {fileID: 2208819049832880418, guid: 6a3331c58d391794baf72165ea02a599, type: 3}
   spellData: {fileID: 11400000, guid: 416fec41779311145a2bc002a4fc9220, type: 2}
   boltSound: {fileID: 8300000, guid: a4d12adf4b1c87f4c80bb091e24a5eaf, type: 3}
