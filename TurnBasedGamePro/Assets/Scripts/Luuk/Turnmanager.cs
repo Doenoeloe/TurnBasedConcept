@@ -52,6 +52,7 @@ public class Turnmanager : MonoBehaviour
         energy?.ResetEnergy();
 
         Debug.Log($"Turn started: {current.Name}");
+        print(players[currentPlayerIndex].Object);
     }
 
     void EndTurn()
@@ -76,4 +77,10 @@ public class Turnmanager : MonoBehaviour
             EndTurn();
         }
     }
+
+    public bool IsCurrentPlayer(GameObject player)
+    {
+        return players[currentPlayerIndex].Object == player;
+    }
+
 }

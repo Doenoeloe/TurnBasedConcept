@@ -12,7 +12,10 @@ public class FireBallAttack : MonoBehaviour
     private InputAction fireBall;                   
 
     private Vector2 aimDirection;                   
-    private bool isAiming;                          
+    private bool isAiming;
+
+    private Energymanager energyManager;
+    private Turnmanager turnManager;
 
     private void OnEnable()
     {
@@ -22,24 +25,42 @@ public class FireBallAttack : MonoBehaviour
     private void Start()
     {
         fireBall = InputSystem.actions.FindAction("Attack"); // Haal de "Attack" actie op
+
+        energyManager = GetComponentInParent<Energymanager>();
+        turnManager = GetComponentInParent<Turnmanager>();
     }
 
     void Update()
     {
-        Aim(); // Continu bijwerken van de richtingshoek
+        // Alleen verder als deze speler aan de beurt is
+        if (!turnManager.IsCurrentPlayer(transform.root.gameObject))
+            return;
 
-        // Houdt bij of speler richt of schiet
+        // Alleen verder als er genoeg energie is
+        if (energyManager.currentEnergy < 25)
+        {
+            isAiming = false;         // Zorg dat de lijn verdwijnt
+            DrawAimLine(false);
+            return;
+        }
+
+        // Alles hieronder gebeurt alleen als speler aan de beurt is en genoeg energie heeft
+        Aim(); // Update richtingshoek
+
         if (fireBall.IsPressed())
             isAiming = true;
 
         if (fireBall.WasReleasedThisFrame())
         {
             isAiming = false;
-            Shoot(); // Schiet de fireball af
+            Shoot();
+            energyManager.UseEnergy(25f);
         }
 
-        DrawAimLine(isAiming); // Toon richtlijn alleen tijdens het richten
+        DrawAimLine(isAiming);
     }
+
+
 
     // Bereken richting naar muis en draai speler daarnaar
     void Aim()

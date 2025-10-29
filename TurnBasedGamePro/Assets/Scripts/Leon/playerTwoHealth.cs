@@ -1,23 +1,55 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerTwoHealth : Health
 {
+    //[SerializeField] private int maxHealth = 100;
+    [SerializeField] private int healAmount = 20;
+    [SerializeField] private InputActionAsset inputActions;
+
+    private int currentHealth;
+    private InputAction healAction;
+    private Turnmanager turnManager;
+    private Energymanager energyManager;
+
+    private AudioSource audioSource;
+    [SerializeField] AudioClip healSound;
+
+    private void Awake()
+    {
+        currentHealth = maxHealth;
+        turnManager = GetComponent<Turnmanager>();
+        energyManager = GetComponent<Energymanager>();
+        audioSource = GetComponent<AudioSource>();
+    }
+
+    private void OnEnable()
+    {
+        inputActions.FindActionMap("Player").Enable();
+        healAction = inputActions.FindActionMap("Player").FindAction("Heal");
+    }
+
     protected override void Update()
     {
-        if (Input.GetKeyUp(KeyCode.M))
+        // Stop als het NIET jouw beurt is
+        if (!turnManager.IsCurrentPlayer(gameObject))
+            return;
+
+        // Alleen healen als de speler op Heal drukt
+        if (healAction.triggered)
         {
-            SetHealth(100);
-            Debug.Log("Player 2 health reset to 100");
+            HealPlayer();
         }
-        else if (Input.GetKeyUp(KeyCode.K))
+    }
+
+    private void HealPlayer()
+    {
+        if (currentHealth >= maxHealth && energyManager.currentEnergy >= 30)
         {
-            Damage(40);
-            Debug.Log("Player 2 took 40 damage");
+            Heal(healAmount);
+            energyManager.UseEnergy(30);
+            audioSource.PlayOneShot(healSound);
         }
-        else if (Input.GetKeyUp(KeyCode.L))
-        {
-            Heal(15);
-            Debug.Log("Player 2 healed 15");
-        }
+
     }
 }
