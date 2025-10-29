@@ -4,19 +4,26 @@ using UnityEngine;
 public class Energymanager : MonoBehaviour
 {
     [Header("Energy Settings")]
-    [SerializeField] private float maxEnergy = 50f;
+    public float maxEnergy = 50f;
     public float currentEnergy;
+
+    private Turnmanager turnManager;
 
     
     internal event Action<GameObject> OnEnergyDepleted;
 
     void Start()
     {
+        turnManager = GetComponent<Turnmanager>();
+
         ResetEnergy();
     }
 
     void FixedUpdate()
     {
+        if (!turnManager.IsCurrentPlayer(gameObject))
+            return;
+
         if (Input.GetKey(KeyCode.D))
             UseEnergy(0.1f);
 

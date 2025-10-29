@@ -36,6 +36,8 @@ public class FireBallAttack : MonoBehaviour
         if (!turnManager.IsCurrentPlayer(transform.root.gameObject))
             return;
 
+        Aim(); // Update richtingshoek
+
         // Alleen verder als er genoeg energie is
         if (energyManager.currentEnergy < 25)
         {
@@ -45,7 +47,6 @@ public class FireBallAttack : MonoBehaviour
         }
 
         // Alles hieronder gebeurt alleen als speler aan de beurt is en genoeg energie heeft
-        Aim(); // Update richtingshoek
 
         if (fireBall.IsPressed())
             isAiming = true;
