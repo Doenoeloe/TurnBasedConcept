@@ -105,49 +105,31 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Fireball",
-                    "type": "Button",
-                    "id": "60c8b5e6-13b9-4b41-8443-d633b392934c",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "LightningStrike",
-                    "type": "Button",
-                    "id": "151c785d-0c03-452e-9737-106e15dbedbe",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Pause",
-                    "type": "Button",
-                    "id": "8016c94e-85d0-44e8-a07d-257a2563eff9",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Heal1",
-                    "type": "Button",
-                    "id": "085f65c9-3fe9-4b5f-9ef3-ec503ebc71ec",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Teleport",
                     "type": "Button",
-                    "id": "9cd01e38-f728-46dc-9246-1f32a950db82",
+                    "id": "7ec67447-2efc-47d5-a1e0-48ab90321776",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Confirm",
+                    "type": "Button",
+                    "id": "1d8aadf9-5d67-4e91-bf43-0294e3ef6508",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Point",
+                    "type": "Value",
+                    "id": "7e16d7b1-ed8a-4b2f-bdee-c1980161e9b7",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -549,56 +531,34 @@
                 },
                 {
                     "name": "",
-                    "id": "28717ba2-be2b-456a-a1c4-90a45a3d9f8d",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "Fireball",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "7d0c8723-642b-40ca-9793-997be1420390",
-                    "path": "<Keyboard>/escape",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "Pause",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "0dade1ba-c2f6-47b2-ad1d-7482b00baf3c",
-                    "path": "<Keyboard>/w",
+                    "id": "8c43281d-ab02-484a-bc0d-ed054c40faae",
+                    "path": "<Keyboard>/f",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "LightningStrike",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "e43db13b-cd7a-4c22-986d-33448207f5b6",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "Heal1",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "611b3c20-dc8f-447d-91b5-f182497893d4",
-                    "path": "<Keyboard>/r",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse",
                     "action": "Teleport",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c3bfe48d-8104-4ad5-b0e0-81c30bd8fa56",
+                    "path": "<Keyboard>/g",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Confirm",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "987cb1fd-99cd-4b1b-a3cc-1c1b46fd52d5",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Point",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
