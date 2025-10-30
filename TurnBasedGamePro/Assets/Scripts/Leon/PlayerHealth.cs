@@ -27,7 +27,7 @@ public class PlayerHealth : Health
         healAction = inputActions.FindActionMap("Player").FindAction("Heal");
     }
 
-    protected override void Update()
+    protected virtual void Update()
     {
         // Stop als het NIET jouw beurt is
         if (!turnManager.IsCurrentPlayer(gameObject))
