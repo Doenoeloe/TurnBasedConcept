@@ -3,31 +3,37 @@ using UnityEngine.InputSystem;
 
 public class FireBallAttack : MonoBehaviour
 {
-    [SerializeField] GameObject fireballPrefab;     
-    [SerializeField] Transform firePoint;          
-    [SerializeField] float launchForce = 10f;       
-    [SerializeField] LineRenderer aimLine;          
+    [Header("Fireball Settings")]
+    [SerializeField] private GameObject fireballPrefab;
+    [SerializeField] private Transform firePoint;
+    [SerializeField] private float launchForce = 10f;
+    [SerializeField] private LineRenderer aimLine;
 
-    [SerializeField] InputActionAsset inputActions; 
-    private InputAction fireBall;                   
+    [Header("Input Settings")]
+    [SerializeField] private InputActionAsset inputActions;
+    private InputAction fireBall;
 
-    private Vector2 aimDirection;                   
+    private Vector2 aimDirection;
     private bool isAiming;
 
     private Energymanager energyManager;
     private Turnmanager turnManager;
+    private Animator animator; // Animator toegevoegd
 
     private void OnEnable()
     {
-        inputActions.FindActionMap("Player").Enable(); // Zorgt dat het "Player" inputmap actief is
+        inputActions.FindActionMap("Player").Enable();
     }
 
     private void Start()
     {
-        fireBall = InputSystem.actions.FindAction("Attack"); // Haal de "Attack" actie op
+        fireBall = InputSystem.actions.FindAction("Attack");
 
         energyManager = GetComponentInParent<Energymanager>();
         turnManager = GetComponentInParent<Turnmanager>();
+
+        // Animator ophalen van de parent (speler)
+        animator = GetComponentInParent<Animator>();
     }
 
     void Update()
@@ -41,12 +47,10 @@ public class FireBallAttack : MonoBehaviour
         // Alleen verder als er genoeg energie is
         if (energyManager.currentEnergy < 25)
         {
-            isAiming = false;         // Zorg dat de lijn verdwijnt
+            isAiming = false;
             DrawAimLine(false);
             return;
         }
-
-        // Alles hieronder gebeurt alleen als speler aan de beurt is en genoeg energie heeft
 
         if (fireBall.IsPressed())
             isAiming = true;
@@ -61,8 +65,6 @@ public class FireBallAttack : MonoBehaviour
         DrawAimLine(isAiming);
     }
 
-
-
     // Bereken richting naar muis en draai speler daarnaar
     void Aim()
     {
@@ -70,12 +72,23 @@ public class FireBallAttack : MonoBehaviour
         aimDirection = (mousePos - transform.position).normalized;
 
         float angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, angle);
+
+        bool isFlipped = transform.root.localScale.x < 0;
+
+        if (isFlipped)
+            transform.rotation = Quaternion.Euler(0, 0, angle + 180f);
+        else
+            transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 
-    // Maak Fireball
+    // Maak Fireball en speel animatie af
     void Shoot()
     {
+        // Speel animatie
+        if (animator != null)
+            animator.SetTrigger("FireBall");
+
+        // Instantieer de fireball
         GameObject fireball = Instantiate(fireballPrefab, firePoint.position, Quaternion.identity);
         Rigidbody2D rb = fireball.GetComponent<Rigidbody2D>();
         rb.AddForce(aimDirection * launchForce, ForceMode2D.Impulse);
@@ -90,7 +103,7 @@ public class FireBallAttack : MonoBehaviour
         {
             aimLine.enabled = true;
             aimLine.SetPosition(0, firePoint.position);
-            aimLine.SetPosition(1, firePoint.position + (Vector3)aimDirection * 10f); // Lengte van de lijn
+            aimLine.SetPosition(1, firePoint.position + (Vector3)aimDirection * 10f);
         }
         else
         {

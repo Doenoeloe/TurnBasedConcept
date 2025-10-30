@@ -56,12 +56,12 @@ public class CameraBehaviour : MonoBehaviour
         if (player == null) return;
 
         // Set all weights low, except this player
-        for (int i = 0; i < targetGroup.Targets.Length; i++)
-        {
-            var t = targetGroup.Targets[i];
-            t.Weight = (t.Object == player.transform) ? zoomInWeight : 0f;
-            targetGroup.Targets[i] = t;
-        }
+        //for (int i = 0; i < targetGroup.Targets.Length; i++)
+        //{
+        //    var t = targetGroup.Targets[i];
+        //    t.Weight = (t.Object == player.transform) ? zoomInWeight : 0f;
+        //    targetGroup.Targets[i] = t;
+        //}
 
         StartZoom(zoomInFOV);
     }
@@ -69,12 +69,12 @@ public class CameraBehaviour : MonoBehaviour
     private void ZoomOut()
     {
         // Even out weights slightly (show all)
-        for (int i = 0; i < targetGroup.Targets.Length; i++)
-        {
-            var t = targetGroup.Targets[i];
-            t.Weight = zoomOutWeight;
-            targetGroup.Targets[i] = t;
-        }
+        //for (int i = 0; i < targetGroup.Targets.Length; i++)
+        //{
+        //    var t = targetGroup.Targets[i];
+        //    t.Weight = zoomOutWeight;
+        //    targetGroup.Targets[i] = t;
+        //}
 
         StartZoom(zoomOutFOV);
     }
