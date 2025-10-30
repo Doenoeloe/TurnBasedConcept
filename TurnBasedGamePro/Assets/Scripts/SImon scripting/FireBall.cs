@@ -45,12 +45,12 @@ public class FireBall : CheckDamage
             if (collision.gameObject.layer == spellData.EnemyLayer)
             {
                 // Damage
-                DamageFireball();
+                DamageSpell();
                 print("DamageFire");
             }
             // Spawn visueel effect
             Instantiate(explosionEffect, transform.position, Quaternion.identity);
-            DamageFireball();
+            DamageSpell();
             // Speel explosie geluid op dezelfde plek, onafhankelijk van dit object
             GameObject temp = new GameObject("TempAudio");
             temp.transform.position = transform.position;
