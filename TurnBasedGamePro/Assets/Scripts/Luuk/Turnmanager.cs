@@ -51,7 +51,6 @@ public class Turnmanager : MonoBehaviour
         var energy = current.Object.GetComponent<Energymanager>();
         energy?.ResetEnergy();
 
-        Debug.Log($"Turn started: {current.Name}");
         print(players[currentPlayerIndex].Object);
     }
 
@@ -65,7 +64,7 @@ public class Turnmanager : MonoBehaviour
         movement.enabled = false;
 
         currentPlayerIndex = (currentPlayerIndex + 1) % players.Count;
-
+        OnTurnChanged?.Invoke(currentPlayerIndex);
         Invoke(nameof(StartTurn), 0.5f);
     }
 
@@ -81,6 +80,13 @@ public class Turnmanager : MonoBehaviour
     public bool IsCurrentPlayer(GameObject player)
     {
         return players[currentPlayerIndex].Object == player;
+    }
+    public event System.Action<int> OnTurnChanged;
+
+
+    public GameObject GetCurrentPlayerObject()
+    {
+        return players[currentPlayerIndex].Object;
     }
 
 }
