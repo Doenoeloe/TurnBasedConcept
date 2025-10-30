@@ -1,10 +1,11 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SpellBarUI : MonoBehaviour
 {
-    [SerializeField] private Image[] spellHighlights; // Assign in inspector
-    private int selectedSpellIndex = -1;
+    [SerializeField] Image[] spellHighlights; // drag highlight images here
+    private int selectedSpellIndex;
 
     void Update()
     {
@@ -20,11 +21,26 @@ public class SpellBarUI : MonoBehaviour
 
     void SelectSpell(int index)
     {
-        // Disable all highlights first
         for (int i = 0; i < spellHighlights.Length; i++)
-            spellHighlights[i].enabled = (i == index);
+        {
+            // make sure the highlight exists before toggling
+            if (spellHighlights[i] != null)
+                spellHighlights[i].gameObject.SetActive(i == index);
+        }
 
-        selectedSpellIndex = index;
-        Debug.Log("Selected Spell: " + (index + 1));
+        selectedSpellIndex = index + 1;
+        Debug.Log("Selected Spell: " + (index));
+    }
+    public int ReadCurrentSpell()
+    {
+        if (selectedSpellIndex != null)
+        {
+            return selectedSpellIndex;
+        }
+        else
+        {
+            return 0;   
+        }
     }
 }
+
