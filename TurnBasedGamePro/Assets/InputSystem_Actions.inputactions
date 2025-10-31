@@ -130,6 +130,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Fireball",
+                    "type": "Button",
+                    "id": "c0f5c9a4-53e8-4529-9b70-8c2ab5cfcaeb",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "96b612f7-510f-4846-9e97-a20c786e263f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -510,10 +528,21 @@
                 {
                     "name": "",
                     "id": "a49fdf08-e13e-4ecb-b3e0-be8145d699c4",
-                    "path": "<Mouse>/rightButton",
+                    "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Lightning",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8d1f0a37-38d1-4570-b247-2b12b92db2bb",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
                     "action": "Lightning",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -521,10 +550,21 @@
                 {
                     "name": "",
                     "id": "fb1f21c8-fa8e-43ad-bbe9-22880ef07a89",
-                    "path": "<Keyboard>/space",
+                    "path": "<Keyboard>/3",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Heal",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fabf4bd4-11f4-4415-b8dc-ccabd1472fd2",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
                     "action": "Heal",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -532,10 +572,21 @@
                 {
                     "name": "",
                     "id": "8c43281d-ab02-484a-bc0d-ed054c40faae",
-                    "path": "<Keyboard>/f",
+                    "path": "<Keyboard>/4",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Teleport",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5fbfb30b-c61a-49f0-9297-599c470a2784",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
                     "action": "Teleport",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -559,6 +610,39 @@
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "Point",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c383d737-e047-4c30-96fd-6ff4f6497a46",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Fireball",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a537ed2b-7765-481c-9ada-f7f3ae855c7f",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Fireball",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "88a1e455-d4bc-48b2-beb2-bef08c1d2c67",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -654,6 +738,15 @@
                     "type": "PassThrough",
                     "id": "9caa3d8a-6b2f-4e8e-8bad-6ede561bd9be",
                     "expectedControlType": "Quaternion",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Escape/Pause",
+                    "type": "Button",
+                    "id": "c491b1e6-0aa8-43f4-a5be-dd08c5a2f0ce",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -1075,6 +1168,17 @@
                     "processors": "",
                     "groups": "XR",
                     "action": "TrackedDeviceOrientation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cd9a3b5e-c826-48f8-8d84-5e90d5663d80",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Escape/Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
