@@ -5,11 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    bool gameIsPaused = false;
+    // Creates a game object field that is used for the PauseUI
     [SerializeField] GameObject pauseMenuUI;
     [SerializeField] InputActionAsset inputActions;
 
-    private InputAction escape;
+    InputAction escape;
+    bool gameIsPaused = false;
     private void OnEnable()
     {
         inputActions.FindActionMap("Player").Enable();
@@ -22,12 +23,16 @@ public class PauseMenu : MonoBehaviour
     {
         if (escape.WasReleasedThisFrame())
         {
+            // If the game is paused it will resume the game, otherwise it will pause it, the bool flag will be reversed by each statement.
             if (gameIsPaused)
                 Resume();
             else
                 Pause();
         }
     }
+    /// <summary>
+    /// This function resumes the game, setting the timescale back to 1. and sets the pause UI to inactive.
+    /// </summary>
     public void Resume()
     {
         pauseMenuUI.SetActive(false);
@@ -35,6 +40,9 @@ public class PauseMenu : MonoBehaviour
         gameIsPaused = false;
     }
 
+    /// <summary>
+    /// This function will pause the game, setting the UI to active, and setting the timescale to 0
+    /// </summary>
     void Pause()
     {
         pauseMenuUI.SetActive(true);
@@ -42,6 +50,9 @@ public class PauseMenu : MonoBehaviour
         gameIsPaused = true;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public void LoadMainMenu()
     {
         Time.timeScale = 1f;
