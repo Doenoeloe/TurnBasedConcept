@@ -1,21 +1,40 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class SpellBarUI : MonoBehaviour
 {
+    [SerializeField] InputActionAsset inputActions;
     [SerializeField] Image[] spellHighlights; // drag highlight images here
     private int selectedSpellIndex;
 
+    private InputAction fireBall;
+    private InputAction lightning;
+    private InputAction healing;
+    private InputAction teleport;
+
+    private void OnEnable()
+    {
+        inputActions.FindActionMap("Player").Enable();
+    }
+    void Awake()
+    {
+        fireBall = InputSystem.actions.FindAction("Fireball");
+        lightning = InputSystem.actions.FindAction("Lightning");
+        healing = InputSystem.actions.FindAction("Heal");
+        teleport = InputSystem.actions.FindAction("Teleport");
+    }
+
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Q))
+        if (fireBall.IsPressed())
             SelectSpell(0);
-        else if (Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.W))
+        else if (lightning.IsPressed())
             SelectSpell(1);
-        else if (Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.E))
+        else if (healing.IsPressed())
             SelectSpell(2);
-        else if (Input.GetKeyDown(KeyCode.Alpha4) || Input.GetKeyDown(KeyCode.R))
+        else if (teleport.IsPressed())
             SelectSpell(3);
     }
 
