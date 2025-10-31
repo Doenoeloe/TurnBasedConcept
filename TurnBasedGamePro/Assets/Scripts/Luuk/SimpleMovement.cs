@@ -2,14 +2,18 @@ using UnityEngine;
 
 public class SimpleMovement : MonoBehaviour
 {
-    public float speed = 5f; // Movement speed
+    public float speed = 5f;
 
     void Update()
     {
-        // Get horizontal input (A/D or Left/Right arrows)
         float move = Input.GetAxis("Horizontal");
 
-        // Move the player left/right
         transform.Translate(Vector3.right * move * speed * Time.deltaTime);
+
+        // Flip root via localScale.x
+        if (move > 0)
+            transform.localScale = new Vector3(-1, 1, 1);  // Kijkt naar rechts
+        else if (move < 0)
+            transform.localScale = new Vector3(1, 1, 1); // Kijkt naar links
     }
 }

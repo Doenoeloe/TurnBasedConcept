@@ -1,13 +1,26 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
     bool gameIsPaused = false;
     [SerializeField] GameObject pauseMenuUI;
+    [SerializeField] InputActionAsset inputActions;
+
+    private InputAction escape;
+    private void OnEnable()
+    {
+        inputActions.FindActionMap("Player").Enable();
+    }
+    void Awake()
+    {
+        escape = InputSystem.actions.FindAction("Pause");
+    }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (escape.WasReleasedThisFrame())
         {
             if (gameIsPaused)
                 Resume();
@@ -31,8 +44,8 @@ public class PauseMenu : MonoBehaviour
 
     public void LoadMainMenu()
     {
-        Time.timeScale = 1f; 
+        Time.timeScale = 1f;
 
-        // SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("Jin_MainMenu_Scene");
     }
 }

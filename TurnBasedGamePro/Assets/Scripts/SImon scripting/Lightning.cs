@@ -8,10 +8,12 @@ public class Lightning : MonoBehaviour
     [SerializeField] GameObject lightningExplosionEffect; 
 
     [SerializeField] InputActionAsset inputActions;       
-    private InputAction lightning;
+    private InputAction input;
 
     private Energymanager energyManager;
     private Turnmanager turnManager;
+
+    private SpellBarUI spellBar;
 
     private void OnEnable()
     {
@@ -22,10 +24,12 @@ public class Lightning : MonoBehaviour
     void Start()
     {
         // Zoek de "Lightning" actie uit het Input System
-        lightning = InputSystem.actions.FindAction("Lightning");
+        input = InputSystem.actions.FindAction("Attack");
 
         energyManager = GetComponentInParent<Energymanager>();
         turnManager = GetComponentInParent<Turnmanager>();
+
+        spellBar = FindFirstObjectByType<SpellBarUI>();
     }
 
     void Update()
@@ -34,12 +38,15 @@ public class Lightning : MonoBehaviour
         if (!turnManager.IsCurrentPlayer(transform.root.gameObject))
             return;
 
+        if (spellBar.ReadCurrentSpell() != 2)
+            return;
+
         // Alleen verder als er genoeg energie is
         if (energyManager.currentEnergy < 25) // bijvoorbeeld 25 energy voor lightning
             return;
 
         // Lightning actie triggered?
-        if (lightning.triggered)
+        if (input.triggered)
         {
             CastLightning();
             energyManager.UseEnergy(25); // verbruik energie
