@@ -28,8 +28,6 @@ public class LightningBolt : CheckDamage
     {
         if (isEnemyHit) return;
 
-        //if (other.layer == spellData.EnemyLayer)
-        //{
             // Damage
             DamageSpell();
             Debug.Log("DamageLightning");
@@ -38,12 +36,11 @@ public class LightningBolt : CheckDamage
             temp.transform.position = transform.position;
             AudioSource a = temp.AddComponent<AudioSource>();
             a.clip = explosionSound;
-            a.spatialBlend = 0f; // 2D geluid
+            a.spatialBlend = 0f;
             a.Play();
             Destroy(temp, explosionSound.length);
             Instantiate(explosionEffect, transform.position, Quaternion.identity);
             isEnemyHit = true;
-        //}
     }
 
 }

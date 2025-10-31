@@ -11,14 +11,16 @@ public class FireBallAttack : MonoBehaviour
 
     [Header("Input Settings")]
     [SerializeField] private InputActionAsset inputActions;
-    private InputAction fireBall;
+    private InputAction input;
 
     private Vector2 aimDirection;
     private bool isAiming;
 
     private Energymanager energyManager;
     private Turnmanager turnManager;
-    private Animator animator; // Animator toegevoegd
+    private Animator animator;
+
+    private SpellBarUI spellBar;
 
     private void OnEnable()
     {
@@ -27,24 +29,26 @@ public class FireBallAttack : MonoBehaviour
 
     private void Start()
     {
-        fireBall = InputSystem.actions.FindAction("Attack");
+        input = InputSystem.actions.FindAction("Attack");
 
         energyManager = GetComponentInParent<Energymanager>();
         turnManager = GetComponentInParent<Turnmanager>();
 
-        // Animator ophalen van de parent (speler)
         animator = GetComponentInParent<Animator>();
+
+        spellBar = FindFirstObjectByType<SpellBarUI>();
     }
 
     void Update()
     {
-        // Alleen verder als deze speler aan de beurt is
         if (!turnManager.IsCurrentPlayer(transform.root.gameObject))
             return;
 
-        Aim(); // Update richtingshoek
+        if (spellBar.ReadCurrentSpell() != 1)
+            return;
 
-        // Alleen verder als er genoeg energie is
+        Aim();
+
         if (energyManager.currentEnergy < 25)
         {
             isAiming = false;
@@ -52,10 +56,10 @@ public class FireBallAttack : MonoBehaviour
             return;
         }
 
-        if (fireBall.IsPressed())
+        if (input.IsPressed())
             isAiming = true;
 
-        if (fireBall.WasReleasedThisFrame())
+        if (input.WasReleasedThisFrame())
         {
             isAiming = false;
             Shoot();
@@ -64,6 +68,7 @@ public class FireBallAttack : MonoBehaviour
 
         DrawAimLine(isAiming);
     }
+
 
     // Bereken richting naar muis en draai speler daarnaar
     void Aim()

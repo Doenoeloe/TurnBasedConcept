@@ -12,7 +12,6 @@ public class Health : MonoBehaviour
         health = maxHealth;
     }
 
-
     public virtual void SetHealth(int pHealth)
     {
         health = Mathf.Clamp(pHealth, 0, maxHealth);

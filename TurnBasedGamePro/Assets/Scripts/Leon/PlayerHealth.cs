@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : Health
 {
@@ -8,10 +9,16 @@ public class PlayerHealth : Health
     [SerializeField] private AudioClip healSound;
 
     //private int currentHealth;
-    private InputAction healAction;
+    private InputAction input;
     private Turnmanager turnManager;
     private Energymanager energyManager;
     private AudioSource audioSource;
+
+    private SpellBarUI spellBar;
+
+    [SerializeField] GameObject winUI;
+    [SerializeField] float mainMenuDelay = 3f;
+    private float timer;
 
     private void Awake()
     {
@@ -19,22 +26,35 @@ public class PlayerHealth : Health
         turnManager = GetComponent<Turnmanager>();
         energyManager = GetComponent<Energymanager>();
         audioSource = GetComponent<AudioSource>();
+        spellBar = FindFirstObjectByType<SpellBarUI>();
     }
 
     private void OnEnable()
     {
         inputActions.FindActionMap("Player").Enable();
-        healAction = inputActions.FindActionMap("Player").FindAction("Heal");
+        input = inputActions.FindActionMap("Player").FindAction("Attack");
     }
 
     protected virtual void Update()
     {
+        if (health <= 0)
+        {
+            winUI.SetActive(true);
+            timer += Time.deltaTime;
+            if (timer > mainMenuDelay)
+            {
+                SceneManager.LoadScene("Jin_MainMenu_Scene");
+            }
+        }
         // Stop als het NIET jouw beurt is
         if (!turnManager.IsCurrentPlayer(gameObject))
             return;
 
+        if (spellBar.ReadCurrentSpell() != 3)
+            return;
+
         // Alleen healen als de speler op Heal drukt
-        if (healAction.triggered)
+        if (input.triggered)
         {
             HealPlayer();
         }

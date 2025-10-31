@@ -8,7 +8,7 @@ public class TeleportHandler : MonoBehaviour
     [SerializeField] private GameObject teleportMarkerPrefab;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float maxTeleportDistance = 10f;
-    [SerializeField] private float teleportEnergyCost = 25f;
+    [SerializeField] private float teleportEnergyCost = 20f;
 
     private InputAction teleportAction;
     private InputAction confirmAction;
@@ -22,6 +22,11 @@ public class TeleportHandler : MonoBehaviour
     private Turnmanager turnManager;
     private Transform playerTransform;
     private Vector2 mousePosition;
+
+    [SerializeField] private float markerHeightOffset = 0.5f;
+
+    private SpellBarUI spellBar;
+
     private void Awake()
     {
         mainCam = Camera.main;
@@ -29,7 +34,7 @@ public class TeleportHandler : MonoBehaviour
 
         // Make sure each player has its own action instance
         var clonedActions = Instantiate(inputActions);
-        teleportAction = clonedActions.FindAction("Teleport");
+        teleportAction = clonedActions.FindAction("Attack");
         confirmAction = clonedActions.FindAction("Confirm");
         pointAction = clonedActions.FindAction("Point");
 
@@ -41,6 +46,7 @@ public class TeleportHandler : MonoBehaviour
     {
         energyManager = GetComponent<Energymanager>();
         turnManager = GetComponent<Turnmanager>();
+        spellBar = FindFirstObjectByType<SpellBarUI>();
     }
 
     private void OnEnable()
@@ -61,6 +67,9 @@ public class TeleportHandler : MonoBehaviour
     {
         // Only current player may act
         if (!turnManager.IsCurrentPlayer(transform.root.gameObject))
+            return;
+
+        if (spellBar.ReadCurrentSpell() != 4)
             return;
 
         // Not enough energy to start aiming
@@ -113,7 +122,8 @@ public class TeleportHandler : MonoBehaviour
         if (energyManager.currentEnergy >= teleportEnergyCost)
         {
             energyManager.UseEnergy(teleportEnergyCost);
-            playerTransform.position = mouseWorld;
+            playerTransform.position = mouseWorld + Vector3.up * markerHeightOffset;
+
             Debug.Log($"{gameObject.name} teleported successfully!");
         }
         else
