@@ -15,7 +15,7 @@ public class CameraBehaviour : MonoBehaviour
     [Space(5)]
 
     [Header("Zoom Settings")]
-    private float zoomInFOV = 7f;
+    private float zoomInFOV = 20f;
     private float zoomOutFOV = 9.99f;
     private float zoomSpeed = 2f;
 
