@@ -2812,6 +2812,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfc5a3cbf6ddfbd41a24c45d80af697d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputActions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   spellHighlights:
   - {fileID: 2070208259}
   - {fileID: 1675116012}
@@ -5261,6 +5262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 75892992}
+  inputActions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
 --- !u!4 &1039308223
 Transform:
   m_ObjectHideFlags: 0
