@@ -8,13 +8,12 @@ public class Turnmanager : MonoBehaviour
     {
         [SerializeField] private string playerName;
         [SerializeField] private GameObject playerObject;
-
         internal string Name => playerName;
         internal GameObject Object => playerObject;
     }
 
     [Header("Players")]
-    [SerializeField] private List<PlayerData> players = new List<PlayerData>();
+    [SerializeField] List<PlayerData> players = new List<PlayerData>();
 
     int currentPlayerIndex = 0;
     bool isTurnActive = false;
@@ -42,7 +41,7 @@ public class Turnmanager : MonoBehaviour
         StartTurn();
     }
 
-    void StartTurn()
+    public void StartTurn()
     {
         var current = players[currentPlayerIndex];
         isTurnActive = true;
@@ -54,9 +53,9 @@ public class Turnmanager : MonoBehaviour
         print(players[currentPlayerIndex].Object);
     }
 
-    void EndTurn()
+    public bool EndTurn()
     {
-        if (!isTurnActive) return;
+        if (!isTurnActive) return false;
 
         isTurnActive = false;
         var current = players[currentPlayerIndex];
@@ -66,6 +65,8 @@ public class Turnmanager : MonoBehaviour
         currentPlayerIndex = (currentPlayerIndex + 1) % players.Count;
         OnTurnChanged?.Invoke(currentPlayerIndex);
         Invoke(nameof(StartTurn), 0.5f);
+
+        return true;
     }
 
     void HandleEnergyDepleted(GameObject player)
@@ -77,11 +78,11 @@ public class Turnmanager : MonoBehaviour
         }
     }
 
-    public bool IsCurrentPlayer(GameObject player)
+  public bool IsCurrentPlayer(GameObject player)
     {
         return players[currentPlayerIndex].Object == player;
     }
-    public event System.Action<int> OnTurnChanged;
+   public event System.Action<int> OnTurnChanged;
 
 
     public GameObject GetCurrentPlayerObject()

@@ -1,17 +1,27 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Energymanager : MonoBehaviour
 {
+  [SerializeField] InputActionAsset inputActions;
+    private InputAction inputCheck;
     [Header("Energy Settings")]
     public float maxEnergy = 50f;
     public float currentEnergy;
 
-    private Turnmanager turnManager;
+    [SerializeField] Turnmanager turnManager;
 
-    
+
     internal event Action<GameObject> OnEnergyDepleted;
-
+    private void OnEnable()
+    {
+        inputActions.FindActionMap("Player").Enable();
+    }
+    private void Awake()
+    {
+        inputCheck = InputSystem.actions.FindAction("Move");
+    }
     void Start()
     {
         turnManager = GetComponent<Turnmanager>();
@@ -21,17 +31,13 @@ public class Energymanager : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!turnManager.IsCurrentPlayer(gameObject))
-            return;
-
-        if (Input.GetKey(KeyCode.D))
+        if (inputCheck.IsPressed())
+        {
             UseEnergy(0.1f);
 
-        if (Input.GetKey(KeyCode.A))
-            UseEnergy(0.1f);
+        }
 
-        //if (Input.GetKeyDown(KeyCode.F))
-        //    UseEnergy(25f);
+
     }
 
     public void UseEnergy(float amount)
